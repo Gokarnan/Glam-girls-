@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#ff5fa2"><title>Glam Girls: Dress to Impress</title>
+<style>
+:root{--p:#ff5fa2;--v:#8b5cf6;--t:#14b8a6;--g:#f5b301;--ink:#4a2a63}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overscroll-behavior:none;font-family:"Trebuchet MS","Avenir Next Rounded",system-ui,sans-serif;color:var(--ink)}
+#app{position:fixed;inset:0;background:linear-gradient(160deg,#ffd3ea,#e4d6ff 55%,#c8f3ec);overflow:hidden}
+#m{position:absolute;inset:0;display:flex;flex-direction:column;gap:6px;padding:calc(env(safe-area-inset-top,0px) + 8px) 10px calc(env(safe-area-inset-bottom,0px) + 8px);animation:in .3s}
+@keyframes in{from{opacity:0;transform:translateY(14px)}}
+button{font:800 clamp(14px,4.2vw,18px) inherit;font-family:inherit;border:0;color:#fff;min-height:48px;min-width:48px;padding:0 14px;border-radius:24px;background:linear-gradient(#ff82bd,#ff4f9a);box-shadow:0 4px 0 #c22d74;touch-action:manipulation}
+button:active{transform:translateY(3px);box-shadow:0 1px 0 #c22d74}
+button.v{background:linear-gradient(#a98bff,#7c4dff);box-shadow:0 4px 0 #5530c4}
+button.t{background:linear-gradient(#3fd8c8,#0fa89a);box-shadow:0 4px 0 #0b7a70}
+button.g{background:linear-gradient(#ffd75e,#f5a900);box-shadow:0 4px 0 #b97d00;color:#5a3a00}
+button.x{background:#ddd;box-shadow:0 4px 0 #aaa;color:#777}
+.big{min-height:64px;font-size:clamp(20px,6vw,26px);width:100%}
+.row{display:flex;gap:8px}.row>button{flex:1;padding:0 4px}
+h1{margin:0;text-align:center;font:900 clamp(26px,9vw,40px)/1.05 "Trebuchet MS",system-ui;color:var(--p);text-shadow:0 3px 0 #fff,0 6px 12px #ff5fa255}
+h1 span{display:block;font-size:.62em;color:var(--v)}
+h2{margin:0;text-align:center;font-size:clamp(20px,6vw,26px)}
+.top{display:flex;align-items:center;gap:8px}
+.coin{margin-left:auto;background:#fff;border-radius:20px;padding:0 12px;min-height:40px;display:flex;align-items:center;font-weight:800;color:#a87400;white-space:nowrap}
+.ban{flex:1;text-align:center;color:#fff;font-weight:900;border-radius:20px;padding:10px 6px;font-size:clamp(13px,4vw,17px)}
+.pv{flex:1;min-height:0;display:flex;justify-content:center}.pv svg{height:100%;max-width:100%}
+.fl svg{animation:fl 2.4s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-8px)}}
+.sc{display:flex;overflow-x:auto;gap:8px;padding:4px 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.sc::-webkit-scrollbar{display:none}
+.tab{flex:none;background:#ffffffb0;color:var(--ink);box-shadow:none;border-radius:16px;font-size:12px;padding:0 8px;min-width:58px}
+.tab.on{background:var(--v);color:#fff}
+.tile{flex:none;width:76px;height:88px;border-radius:16px;background:#fff;border:3px solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:700;text-align:center;line-height:1.1;padding:2px}
+.tile.eq{border-color:var(--p);box-shadow:0 0 0 3px #ff5fa255}.tile.lk{opacity:.55}
+.dot{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;border:2px solid #0001}
+.bar{display:flex;gap:6px}.bar .w{flex:1}
+.list{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+.it{display:flex;align-items:center;gap:10px;background:#fffd;border-radius:18px;padding:8px}.it b{flex:1;font-size:15px}.it small{display:block;color:#8a6aa5;font-weight:600}
+.it button{min-width:96px;font-size:14px}.pop{animation:pop .5s}@keyframes pop{40%{transform:scale(1.07);background:#fff3b0}}
+.grid{flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}
+.card{background:#fffd;border-radius:20px;padding:8px;text-align:center;font-weight:800;display:flex;flex-direction:column;gap:6px;align-items:center}
+.card svg{height:150px}.card.sm svg{height:110px}
+#toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 64px);transform:translate(-50%,-30px);background:#4a2a63;color:#fff;padding:10px 18px;border-radius:20px;font-weight:700;opacity:0;transition:.25s;z-index:9;max-width:90%;text-align:center;pointer-events:none}#toast.show{opacity:1;transform:translate(-50%,0)}
+#pz,#rot{position:fixed;inset:0;background:#4a2a63ee;color:#fff;font-size:24px;font-weight:800;display:none;align-items:center;justify-content:center;text-align:center;z-index:20;padding:20px}
+@media (orientation:landscape) and (max-height:500px){#rot{display:flex}}
+.rw{flex:1;position:relative;overflow:hidden;border-radius:24px;background:radial-gradient(ellipse at 50% 0,#fff8 0,#0000 55%),linear-gradient(#3b1d6b,#7a3fb8 70%,#f4b6d9);}
+.cur{position:absolute;top:0;bottom:0;width:20%;background:repeating-linear-gradient(90deg,#c2185b,#e84a8a 14px,#c2185b 28px)}.cur.l{left:0;border-radius:0 0 60% 0}.cur.r{right:0;border-radius:0 0 0 60%}
+.spot{position:absolute;left:50%;top:-5%;width:80%;height:110%;transform:translateX(-50%);background:conic-gradient(from 160deg at 50% 0,#0000 0,#fff6 10%,#0000 20%);animation:sw 4s ease-in-out infinite alternate}@keyframes sw{to{transform:translateX(-50%) rotate(8deg)}}
+.aud{position:absolute;left:0;right:0;bottom:0;height:16%;background:radial-gradient(circle at 10px 10px,#1d0f33 9px,#0000 10px) 0 0/34px 30px,linear-gradient(#0000,#1d0f33 40%);}
+.stage{position:absolute;left:0;right:0;bottom:12%;height:70%;display:flex;justify-content:center}.stage svg{height:100%}
+.spk{position:absolute;color:#fff3a8;animation:tw 1.6s infinite;font-size:18px}@keyframes tw{50%{opacity:.1;transform:scale(.4)}}
+.rwb{position:absolute;left:10px;right:10px;bottom:6px;display:flex;gap:8px}.rwb button{flex:1}
+.jd{display:flex;gap:6px}.jd .card{flex:1;font-size:12px;padding:6px;min-height:92px}.jd .e{font-size:30px}
+.cr{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px}.cr i{flex:1;height:16px;background:#fff9;border-radius:8px;overflow:hidden}.cr u{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--p),var(--g));transition:width .6s;border-radius:8px}.cr span:first-child{width:36%}.cr span:last-child{width:26px;text-align:right}
+.sco{font:900 clamp(60px,22vw,100px)/1 system-ui;text-align:center;color:var(--p);text-shadow:0 4px 0 #fff}
+.cf{position:fixed;top:-20px;width:10px;height:14px;animation:fall 2.8s linear forwards;z-index:8;pointer-events:none}@keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
+button.sw{width:72px;min-width:72px;padding:0;border-radius:24px;background:#bbb;box-shadow:none;position:relative;flex:none}.sw i{position:absolute;top:5px;left:5px;width:38px;height:38px;border-radius:50%;background:#fff;transition:.2s}.sw.on{background:#ff5fa2}.sw.on i{left:29px}
+.swr{display:flex;align-items:center;gap:10px;background:#fffd;border-radius:18px;padding:10px}.swr div{flex:1}.swr b{display:block}.swr small{display:block;font-weight:600;color:#7a5a95;font-size:12px;line-height:1.25}
+.bpb{background:#111;color:#ffd75e;border:2px solid #ff5fa2;border-radius:14px;padding:4px 10px;font-size:11px;font-weight:900;white-space:nowrap}
+.jc{font-size:12px;padding:6px;gap:2px}.jc svg{height:64px}.jq{font-weight:600;line-height:1.15;min-height:3.4em}.js{font:900 20px system-ui;color:var(--p)}.dis{text-align:center;font-size:10px;font-weight:600;opacity:.85}
+#app.bp{background:linear-gradient(160deg,#16091a,#4d1239 55%,#ff5fa2)}#app.bp #m{color:#fff}#app.bp .card{color:#4a2a63;background:#fffe}
+.rw.bpr{background:radial-gradient(ellipse at 50% 0,#ff8ac488 0,#0000 55%),linear-gradient(#0b0610,#3a0f2e 70%,#ff5fa2)}.bpr .spot{background:conic-gradient(from 160deg at 50% 0,#0000 0,#ff5fa2aa 10%,#0000 20%)}.bpr::before{content:"";position:absolute;inset:0;pointer-events:none;background:conic-gradient(from 200deg at 20% 0,#0000 0,#fff5 6%,#0000 12%);animation:sw 3s infinite alternate-reverse}.bpr .spk{color:#ff8ac4}.bpr .spk:nth-child(even){color:#ffd75e}.bpr .cur{background:repeating-linear-gradient(90deg,#111,#2a2a2a 14px,#111 28px)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important}}
+</style></head><body>
+<div id="app"><div id="m"></div></div>
+<div id="toast"></div><div id="pz">⏸ Paused<br>Tap to keep playing</div><div id="rot">📱 Please turn your phone upright</div>
+<script>
+'use strict';
+const $=s=>document.querySelector(s),m=$('#m'),K='glamgirls_v1';
+/* ---------- DATA (add more entries here to expand the game) ---------- */
+const mk=a=>a.map(x=>({n:x[0],p:x[1],c:x[2],t:x[3]?x[3].split(','):[],s:x[4]}));
+const col=(ns,cs,ps)=>ns.map((n,i)=>({n,c:cs[i],p:ps?ps[i]:0,t:[]}));
+const SKL=col(['Porcelain','Peach','Honey','Caramel','Cocoa','Deep'],['#fbe0cf','#f3c9a8','#e8b48a','#c98d62','#8d5a3b','#5e3a26']);
+const EYL=col(['Hazel','Green','Blue','Violet','Brown','Gray'],['#8a5a2b','#2e8b57','#4aa3ff','#8b5cf6','#4a2f1f','#6b7280']);
+const HCL=col(['Brown','Black','Blonde','Red','Blue','Pink','Purple','Silver'],['#6b3f2a','#2b2024','#f6d58c','#d63a3a','#4aa3ff','#ff5fa2','#9b6bff','#d8d8e8']);
+const HAIR=mk([['Long',0,'#e9d5ff','','long'],['Bob',0,'#e9d5ff','','bob'],['Ponytail',0,'#e9d5ff','','pony'],['Curly',40,'#e9d5ff','','curly'],['Short',40,'#e9d5ff','','short'],['Bun',50,'#e9d5ff','','bun'],['Waves',60,'#e9d5ff','','wave']]);
+const DR=mk([['Casual Top',0,'#ff9ec4','casual,school,pop','t'],['School Pinafore',0,'#5b7bd5','school,casual','s'],['Sundress',0,'#ffd166','beach,garden','s'],['Party Dress',80,'#c084fc','pop,carpet','s'],['Princess Dress',100,'#f9a8d4','princess,royal,fairy','g'],['Fairy Dress',90,'#7ee0c3','fairy,garden','a'],['Winter Dress',110,'#9ec5ff','winter','a'],['Sports Top',40,'#2ec4b6','casual,pop','t'],['Royal Robe',220,'#7c3aed','royal,princess','g'],['Space Suit',160,'#38bdf8','space,pop','s'],['Floral Dress',70,'#ff7aa2','garden,beach','a'],['Red-Carpet Gown',260,'#e11d48','carpet,royal','g'],['Rainbow Top',60,'#f472b6','rainbow,pop','t']]);
+const BT=mk([['Jeans',0,'#5b8def','casual,school,winter','p'],['Pink Skirt',0,'#ff8fb8','princess,garden,school','k'],['Denim Shorts',0,'#7aa7e8','beach,casual','h'],['Sparkle Skirt',60,'#c084fc','pop,carpet,rainbow','k'],['Snow Leggings',50,'#bfe3ff','winter','p'],['Cosmic Pants',90,'#6366f1','space,pop','p'],['Tutu',70,'#f9a8d4','fairy,princess','k'],['Track Pants',40,'#34d399','casual','p']]);
+const SH=mk([['Sneakers',0,'#ffffff','casual,school,pop,rainbow'],['Pink Flats',0,'#ff8fb8','garden,princess,school'],['Sandals',30,'#f4a261','beach,garden'],['Snow Boots',50,'#8d6e63','winter'],['Heels',80,'#e11d48','carpet,royal,pop'],['Glass Slippers',120,'#bae6fd','princess,fairy,royal'],['Moon Boots',100,'#94a3b8','space,winter'],['Rainbow Kicks',70,'#a78bfa','rainbow,pop,casual']]);
+const EAR=mk([['Studs',0,'#ffffff',''],['Gold Hoops',30,'#f5b301','pop,carpet,casual'],['Star Drops',50,'#fde047','pop,space'],['Flower Studs',40,'#ff9ec4','garden,fairy'],['Crystals',70,'#a5f3fc','carpet,princess,royal']]);
+const NK=mk([['Heart Pendant',0,'#ff5fa2','casual,school'],['Pearls',40,'#fff7ed','carpet,royal,princess'],['Star Chain',40,'#fde047','pop,space'],['Shell Necklace',30,'#fdba74','beach'],['Royal Gem',120,'#8b5cf6','royal,carpet,princess']]);
+const BR=mk([['Bead Band',0,'#ff9ec4','casual,school'],['Gold Cuff',40,'#f5b301','carpet,royal,pop'],['Charm Bracelet',50,'#c084fc','garden,fairy,princess'],['Friendship Bands',30,'#2ec4b6','rainbow,beach,school']]);
+const BG=mk([['Mini Bag',0,'#ff8fb8','casual,garden'],['Backpack',40,'#6366f1','school,casual'],['Clutch',60,'#e11d48','carpet,royal'],['Beach Tote',40,'#fbbf24','beach,garden'],['Star Bag',60,'#facc15','pop,space,rainbow'],['Crystal Purse',100,'#a5f3fc','princess,royal,fairy']]);
+const HA=mk([['Pink Bow',0,'#ff5fa2','casual,school,garden','bow'],['Headband',0,'#8b5cf6','school,casual','band'],['Flower Clip',30,'#ffb3d1','garden,fairy,beach','flower'],['Star Clip',40,'#fde047','pop,space,rainbow','star'],['Crown',150,'#f5b301','royal,princess,carpet','crown']]);
+const JK=mk([['Denim Jacket',0,'#7aa7e8','casual,school,beach'],['Puffer Coat',70,'#f9a8d4','winter'],['Letterman',60,'#c026d3','school,pop,rainbow'],['Royal Cape',130,'#7c3aed','royal,princess,fairy'],['Glitter Blazer',110,'#fbbf24','carpet,pop'],['Fairy Shawl',80,'#86efac','fairy,garden']]);
+const FX=mk([['Sparkle Aura',60,'#fde68a'],['Pink Glow',90,'#ff9ec4'],['Star Shower',120,'#c4b5fd']]);
+const MKN={blush:['Blush','🌸',['Pink','Peach','Rose','Berry'],['#ff9fb8','#ffb08a','#f06292','#c2185b']],shadow:['Shadow','👁️',['Petal','Violet','Ocean','Sunset'],['#f9a8d4','#a78bfa','#5eead4','#fb923c']],liner:['Liner','✏️',['Brown','Purple','Teal','Magenta'],['#3b2a35','#5b3fa8','#0e7490','#be185d']],mascara:['Lashes','🖤',['Black','Indigo','Teal','Plum'],['#2b2024','#3b2a8a','#0f766e','#9d174d']],lip:['Lips','💋',['Candy','Ruby','Orchid','Coral'],['#ff7aa2','#e11d48','#c026d3','#fb923c']],sticker:['Stickers','⭐',['Star','Heart','Gem','Moon'],['#fbbf24','#f43f5e','#38bdf8','#a78bfa']],glitter:['Glitter','✨',['Gold','Pink','Ice','Lilac'],['#fde68a','#f9a8d4','#a5f3fc','#e9d5ff']],highlight:['Glow','🌟',['Pearl','Rosy','Frost','Honey'],['#fff7d6','#ffe4f2','#e0f7ff','#fff0c2']],brow:['Brows','🤎',['Soft','Arched','Straight','Bold'],['#6b4a3a','#6b4a3a','#6b4a3a','#6b4a3a']]};
+const MKC=Object.keys(MKN),L_={skin:SKL,eyes:EYL,hair:HAIR,hairc:HCL,dress:DR,bottom:BT,shoes:SH,ear:EAR,neck:NK,brace:BR,bag:BG,hacc:HA,jacket:JK,fx:FX};
+MKC.forEach(k=>L_[k]=col(MKN[k][2],MKN[k][3],[0,0,20,35]));
+const LAB={skin:['Skin','🎨'],eyes:['Eyes','👁️'],hair:['Hair','💇‍♀️'],hairc:['Color','🌈'],dress:['Dress','👗'],bottom:['Bottoms','👖'],shoes:['Shoes','👟'],ear:['Earrings','💎'],neck:['Necklace','📿'],brace:['Bracelet','⌚'],bag:['Handbag','👜'],hacc:['Hair Acc.','🎀'],jacket:['Jacket','🧥'],fx:['Effects','✨']};
+MKC.forEach(k=>LAB[k]=[MKN[k][0],MKN[k][1]]);
+const STY=['skin','eyes','hair','hairc','dress','bottom','shoes','ear','neck','brace','bag','hacc','jacket','fx'];
+const PRE=[['Natural',{blush:0,lip:0,brow:0}],['Sparkle',{blush:0,shadow:0,glitter:0,highlight:0,lip:0}],['Rose',{blush:2,shadow:0,lip:0,mascara:0}],['Sunset',{blush:1,shadow:3,lip:3,liner:0}],['Ocean',{shadow:2,liner:2,glitter:2,mascara:2}],['Royal',{shadow:1,liner:1,lip:2,glitter:3,sticker:0}],['Rainbow',{shadow:1,blush:1,lip:1,glitter:1,sticker:1}]];
+const CH=[{id:'ava',n:'Ava',p:0,skin:2,eyes:4,hair:6,hc:0,face:31,d:'Cheerful & friendly'},{id:'mia',n:'Mia',p:150,skin:4,eyes:0,hair:3,hc:1,face:34,d:'Elegant curls'},{id:'lily',n:'Lily',p:300,skin:0,eyes:2,hair:0,hc:2,face:30,d:'Soft pastel dreamer'},{id:'zara',n:'Zara',p:500,skin:3,eyes:1,hair:4,hc:5,face:32,d:'Bold & modern'},{id:'ruby',n:'Ruby',p:800,skin:1,eyes:1,hair:6,hc:3,face:30,d:'Glamorous sparkle'},{id:'skye',n:'Skye',p:1200,skin:5,eyes:3,hair:1,hc:4,face:33,d:'Futuristic trendsetter'}];
+const TH=[['princess','Princess Ball','👑','#e056a0'],['beach','Beach Day','🏖️','#14b8a6'],['winter','Winter Wonderland','⛄','#5b9bff'],['carpet','Red Carpet','🎬','#d6203f'],['garden','Garden Party','🌷','#4cae6b'],['pop','Pop Star','🎤','#a855f7'],['fairy','Fairy Fantasy','🧚','#38c6a5'],['school','School Celebration','🎒','#ef8a3c'],['royal','Royal Court','🏰','#7c3aed'],['space','Space Gala','🚀','#3b6fe0'],['rainbow','Rainbow Festival','🌈','#ec5fa8'],['casual','Casual Weekend','☕','#e0883a']].map(x=>({id:x[0],n:x[1],e:x[2],c:x[3]}));
+const JG=[['Bella','💁‍♀️'],['Coco','👩‍🎨'],['Pearl','🧚‍♀️']];
+const HI={theme:'Amazing theme match!',color:'Your colors work beautifully together!',coord:'Everything fits together so well!',mk:'That makeup look is so creative!',acc:'The accessories complete the outfit!',cre:'You created a unique fashion moment!',pre:'You owned that runway!'};
+const LO={theme:'Try adding an item that fits the theme!',color:'Try fewer colors for a calmer palette!',coord:'Try matching your shoes and bottoms to your outfit!',mk:'Great start—try adding one more makeup touch!',acc:'Great start—try adding one more accessory!',cre:'Try a bold hair color or a sparkle effect!',pre:'Strike a pose on the runway next time!'};
+const TIER=[[90,'A show-stopping look!'],[75,'A lovely look with lots of personality!'],[55,'Such a fun outfit with great spirit!'],[0,'A wonderful start—keep creating!']];
+const CATN=[['theme','Theme match'],['coord','Coordination'],['color','Color harmony'],['mk','Makeup styling'],['acc','Accessories'],['cre','Creativity'],['pre','Presentation']];
+/* ---------- STATE ---------- */
+const S0={coins:50,best:0,chars:['ava'],sel:'ava',own:{},look:null,mk:{},wd:[],mute:0,vib:1,day:'',music:0,blackpinkModeEnabled:false};
+const BPM=()=>!!S.blackpinkModeEnabled;
+let S;try{S=Object.assign({},S0,JSON.parse(localStorage.getItem(K)))}catch(e){S=Object.assign({},S0)}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const ch=()=>CH.find(c=>c.id==S.sel)||CH[0];
+const base=c=>({skin:c.skin,eyes:c.eyes,hair:c.hair,hairc:c.hc,dress:0,bottom:0,shoes:0,ear:-1,neck:-1,brace:-1,bag:-1,hacc:-1,jacket:-1,fx:-1});
+if(!S.look)S.look=base(ch());
+let theme=TH[0],cur='',mode='style',tab='dress',res=null,posed=false,epoch=0,rw=null;
+const own=(c,i)=>L_[c][i].p==0||!!S.own[c+':'+i];
+const slot=c=>MKC.includes(c)?S.mk:S.look;
+const gv=c=>{const v=slot(c)[c];return v==null?-1:v};
+const cn=()=>S.coins;
+/* ---------- AUDIO ---------- */
+let ac;function tone(f,d,dl){if(S.mute)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state=='suspended')ac.resume();const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+dl;o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(.07,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+d)}catch(e){}}
+const SFX={tap:[[660,.05]],pick:[[520,.08],[780,.1]],equip:[[600,.08],[900,.1]],mk:[[880,.08],[1100,.1]],buy:[[523,.1],[659,.1],[784,.1],[1047,.25]],run:[[330,.12],[392,.12],[494,.12],[659,.25]],judge:[[700,.12]],coin:[[988,.07],[1319,.18]],unlock:[[523,.1],[659,.1],[784,.1],[1047,.1],[1319,.3]],hi:[[784,.1],[988,.1],[1175,.1],[1568,.35]],err:[[200,.2]],bp:[[392,.08],[523,.08],[659,.08],[784,.08],[1047,.22]]};
+const sfx=n=>{SFX[n].forEach((x,i)=>tone(x[0],x[1],i*.09))};
+const vib=n=>{if(S.vib&&navigator.vibrate)navigator.vibrate(n||12)};
+/* ---------- LOOP / SCHEDULER (requestAnimationFrame) ---------- */
+let clk=0,last=performance.now(),paused=false,Q=[];
+const later=(ms,f,g)=>Q.push([clk+ms,f,g?-1:epoch]);
+function loop(n){const dt=Math.min(50,n-last);last=n;
+ if(!paused){clk+=dt;const due=Q.filter(q=>q[0]<=clk);Q=Q.filter(q=>q[0]>clk);due.sort((a,b)=>a[0]-b[0]).forEach(q=>{if(q[2]==-1||q[2]==epoch)q[1]()});
+  if(cur=='runway'&&rw&&rw.el){rw.t+=dt;const k=Math.min(1,rw.t/2400),e=1-Math.pow(1-k,3),x=-75*(1-e),b=k<1?Math.abs(Math.sin(rw.t/170))*8:0,r=posed?(BPM()?[-6,6,0][rw.ps||0]:Math.sin(rw.t/220)*3):0;rw.el.style.transform=`translate(${x}%,${-b}px) rotate(${r}deg) scale(${posed?1.04:1})`;if(k>=1&&!rw.done){rw.done=1;$('#rwb').style.display='flex';sfx(BPM()?'bp':'run')}}}
+ requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+function pause(on){paused=on;$('#pz').style.display=on?'flex':'none';if(on&&ac&&ac.suspend)ac.suspend()}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)pause(true)});
+window.addEventListener('blur',()=>pause(true));
+$('#pz').addEventListener('pointerup',()=>{pause(false);if(ac&&ac.resume)ac.resume()});
+['gesturestart','gesturechange','contextmenu','dblclick'].forEach(e=>document.addEventListener(e,x=>x.preventDefault()));
+document.addEventListener('touchmove',e=>{if(!e.target.closest('.sc,.list,.grid'))e.preventDefault()},{passive:false});
+function toast(t){const e=$('#toast');e.textContent=t;e.className='show';later(1800,()=>{e.className=''},1)}
+/* ---------- AVATAR (inline SVG) ---------- */
+const DP={t:'M72 120H128L124 206H76Z',s:'M72 120H128L130 150L154 238H46L70 150Z',a:'M72 120H128L130 150L158 286H42L70 150Z',g:'M72 120H128L130 150L172 336H28L70 150Z'};
+const BRW=['M79 65Q86 62 93 65M107 65Q114 62 121 65','M79 66Q86 57 93 65M107 65Q114 57 121 66','M79 64H93M107 64H121','M79 66L93 62M107 62L121 66'];
+const HB={long:'<path d="M62 74Q58 22 100 24Q142 22 138 74L146 200Q100 214 54 200Z"/>',bob:'<path d="M62 74Q58 22 100 24Q142 22 138 74L142 120Q100 134 58 120Z"/>',pony:'<path d="M62 70Q60 24 100 24Q140 24 138 70Z"/><path d="M134 48Q182 66 162 150Q150 104 130 82Z"/>',curly:'<g>'+[[62,60],[72,38],[100,28],[128,38],[138,60],[58,92],[142,92],[60,122],[140,122],[66,148],[134,148]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="17"/>`).join('')+'</g>',short:'<path d="M62 72Q58 22 100 24Q142 22 138 72L140 96Q100 70 60 96Z"/>',bun:'<path d="M62 70Q60 24 100 24Q140 24 138 70Z"/><circle cx="100" cy="16" r="17"/>',wave:'<path d="M60 74Q54 20 100 22Q146 20 140 74Q158 130 140 192Q122 172 100 202Q78 172 60 192Q42 130 60 74Z"/>'};
+function av(c,L,M,fx){
+ const sk=SKL[L.skin].c,hc=HCL[L.hairc].c,f=c.face,hs=HAIR[L.hair].s;
+ const it=k=>L[k]>=0?L_[k][L[k]]:null,mm=k=>M[k]>=0?L_[k][M[k]]:null;
+ const dr=it('dress'),bt=it('bottom'),sh=it('shoes'),ea=it('ear'),nk=it('neck'),br=it('brace'),bg=it('bag'),ha=it('hacc'),jk=it('jacket');
+ let s='<svg viewBox="0 0 200 360" xmlns="http://www.w3.org/2000/svg">';
+ s+=`<g fill="${hc}">${HB[hs]}</g>`;
+ s+=`<rect x="84" y="200" width="13" height="136" rx="6" fill="${sk}"/><rect x="103" y="200" width="13" height="136" rx="6" fill="${sk}"/>`;
+ if(bt&&(!dr||dr.s=='t')){const c2=bt.c;s+=bt.s=='k'?`<path d="M74 198H126L150 270H50Z" fill="${c2}"/>`:bt.s=='p'?`<rect x="80" y="198" width="19" height="136" rx="6" fill="${c2}"/><rect x="101" y="198" width="19" height="136" rx="6" fill="${c2}"/><rect x="76" y="196" width="48" height="14" fill="${c2}"/>`:`<rect x="76" y="198" width="23" height="44" rx="5" fill="${c2}"/><rect x="101" y="198" width="23" height="44" rx="5" fill="${c2}"/>`}
+ s+=`<path d="${dr?DP[dr.s]:DP.t}" fill="${dr?dr.c:'#fff'}"/>`;
+ if(dr)s+=`<path d="M100 124V${dr.s=='t'?196:dr.s=='s'?226:dr.s=='a'?274:322}" stroke="#fff" stroke-opacity=".35" stroke-width="3"/>`;
+ const ac_=jk?jk.c:sk;
+ s+=`<g stroke="${ac_}" stroke-width="${jk?13:10}" stroke-linecap="round"><path d="M72 128L58 190M128 128L142 190"/></g><circle cx="58" cy="196" r="6.5" fill="${sk}"/><circle cx="142" cy="196" r="6.5" fill="${sk}"/>`;
+ if(jk)s+=`<path d="M68 120H88L86 214H66ZM132 120H112L114 214H134Z" fill="${jk.c}"/><path d="M88 120L100 150L112 120" fill="none" stroke="#fff6" stroke-width="2"/>`;
+ if(sh)s+=`<ellipse cx="90" cy="342" rx="15" ry="8" fill="${sh.c}" stroke="#0002"/><ellipse cx="110" cy="342" rx="15" ry="8" fill="${sh.c}" stroke="#0002"/>`;
+ if(br)s+=`<ellipse cx="58" cy="187" rx="8" ry="3.5" fill="none" stroke="${br.c}" stroke-width="3"/>`;
+ if(bg)s+=`<path d="M134 196Q142 176 150 196" fill="none" stroke="${bg.c}" stroke-width="3"/><rect x="130" y="196" width="26" height="22" rx="6" fill="${bg.c}" stroke="#0002"/>`;
+ if(nk)s+=`<path d="M88 117Q100 140 112 117" fill="none" stroke="${nk.c}" stroke-width="3"/><circle cx="100" cy="134" r="5" fill="${nk.c}"/>`;
+ s+=`<rect x="92" y="100" width="16" height="22" fill="${sk}"/><circle cx="${100-f}" cy="80" r="5.5" fill="${sk}"/><circle cx="${100+f}" cy="80" r="5.5" fill="${sk}"/><ellipse cx="100" cy="72" rx="${f}" ry="36" fill="${sk}"/>`;
+ if(ea)s+=`<circle cx="${100-f}" cy="89" r="4" fill="${ea.c}"/><circle cx="${100+f}" cy="89" r="4" fill="${ea.c}"/>`;
+ const bl=mm('blush'),sd=mm('shadow'),ln=mm('liner'),ms=mm('mascara'),lp=mm('lip'),st=mm('sticker'),gl=mm('glitter'),hl=mm('highlight'),bw=mm('brow');
+ if(bl)s+=`<circle cx="75" cy="88" r="7" fill="${bl.c}" opacity=".6"/><circle cx="125" cy="88" r="7" fill="${bl.c}" opacity=".6"/>`;
+ if(hl)s+=`<ellipse cx="100" cy="82" rx="2.5" ry="5" fill="${hl.c}" opacity=".8"/><ellipse cx="77" cy="80" rx="5" ry="2.5" fill="${hl.c}" opacity=".8"/><ellipse cx="123" cy="80" rx="5" ry="2.5" fill="${hl.c}" opacity=".8"/>`;
+ if(sd)s+=`<ellipse cx="86" cy="71" rx="9" ry="5" fill="${sd.c}" opacity=".65"/><ellipse cx="114" cy="71" rx="9" ry="5" fill="${sd.c}" opacity=".65"/>`;
+ for(const x of [86,114])s+=`<ellipse cx="${x}" cy="77" rx="6.5" ry="7" fill="#fff"/><circle cx="${x}" cy="78" r="4.4" fill="${EYL[L.eyes].c}"/><circle cx="${x}" cy="78" r="2" fill="#111"/><circle cx="${x+1.6}" cy="76" r="1.3" fill="#fff"/>`;
+ if(ln)s+=`<path d="M78 74Q86 68 94 74M106 74Q114 68 122 74" fill="none" stroke="${ln.c}" stroke-width="2"/>`;
+ if(ms)s+=`<path d="M78 73l-4-2M81 70l-3-4M94 73l4-2M106 73l-4-2M119 70l3-4M122 73l4-2" stroke="${ms.c}" stroke-width="1.7" stroke-linecap="round"/>`;
+ s+=`<path d="${BRW[bw?M.brow:0]}" fill="none" stroke="${hc==='#f6d58c'||hc==='#d8d8e8'?'#9a7b5a':hc}" stroke-width="${bw?(M.brow==3?3.6:2.6):1.6}" stroke-linecap="round" opacity="${bw?1:.6}"/>`;
+ s+=`<path d="M91 91Q100 99 109 91Q100 94 91 91Z" fill="${lp?lp.c:'#e08a85'}"/>`;
+ if(st)s+=`<text x="122" y="64" font-size="12" fill="${st.c}">${['★','♥','◆','☾'][M.sticker]}</text>`;
+ if(gl)s+=[[72,76],[128,78],[78,94],[122,94],[100,56],[88,60],[112,60],[70,86]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="1.8" fill="${gl.c}"/>`).join('');
+ s+=`<path d="M${99-f} 74Q${96-f} 30 100 30Q${104+f} 30 ${101+f} 74Q${94+f} 52 100 50Q${106-f} 52 ${99-f} 74Z" fill="${hc}"/>`;
+ if(hs=='curly')s+=[[80,36],[100,30],[120,36]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="12" fill="${hc}"/>`).join('');
+ if(ha){const c2=ha.c;s+=ha.s=='bow'?`<path d="M128 40L144 30V52ZM128 40L112 30V52Z" fill="${c2}"/><circle cx="128" cy="40" r="4" fill="#fff8"/>`:ha.s=='crown'?`<path d="M78 40L82 18L92 32L100 12L108 32L118 18L122 40Z" fill="${c2}" stroke="#b97d00"/>`:ha.s=='flower'?`<g fill="${c2}"><circle cx="124" cy="38" r="6"/><circle cx="132" cy="44" r="6"/><circle cx="118" cy="46" r="6"/></g><circle cx="125" cy="42" r="3.5" fill="#ffe27a"/>`:ha.s=='star'?`<text x="118" y="44" font-size="22" fill="${c2}">★</text>`:`<path d="M${99-f} 62Q100 18 ${101+f} 62" fill="none" stroke="${c2}" stroke-width="5"/>`}
+ if(fx&&L.fx>=0)s+=[[30,60],[170,90],[24,170],[176,200],[40,290],[165,300],[100,6]].map((p,i)=>`<text class="spk" x="${p[0]}" y="${p[1]}" font-size="18" fill="${FX[L.fx].c}" style="animation-delay:${i*.25}s">✦</text>`).join('');
+ return s+'</svg>'}
+const myAv=fx=>av(ch(),S.look,S.mk,fx);
+/* ---------- JUDGING ---------- */
+function hue(h){const r=parseInt(h.slice(1,3),16)/255,g=parseInt(h.slice(3,5),16)/255,b=parseInt(h.slice(5,7),16)/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;if(d<.12||mx<.2||mn>.9)return -1;const H=mx==r?((g-b)/d)%6:mx==g?(b-r)/d+2:(r-g)/d+4;return Math.round(((H*60+360)%360)/60)%6}
+function judge(){
+ const L=S.look,M=S.mk,th=theme.id,get=k=>L[k]>=0?L_[k][L[k]]:null,all=['dress','bottom','shoes','jacket','bag','hacc','ear','neck','brace'].map(get).filter(Boolean);
+ const dr=get('dress'),dt=dr?dr.t:[],tm=all.filter(i=>i.t.includes(th)).length;
+ const theme_=Math.min(10,2+tm*1.6);
+ const co=all.filter(i=>i!=dr&&i.t.some(x=>x==th||dt.includes(x))).length,coord=Math.min(10,3+7*co/Math.max(all.length-(dr?1:0),1)+(dr&&get('shoes')?.5:0));
+ const hs=new Set(['dress','bottom','shoes','jacket','bag','hacc'].map(get).filter(Boolean).map(i=>hue(i.c)).filter(h=>h>=0)),lh=M.lip>=0?hue(L_.lip[M.lip].c):-1;
+ let color=hs.size<=2?9:hs.size==3?7.5:hs.size==4?6:5;if(th=='rainbow')color+=2.5;if(lh>=0&&hs.has(lh))color+=.5;color=Math.min(10,Math.max(4,color));
+ const fm=MKC.filter(k=>M[k]>=0).length,mkS=Math.min(10,1.5+fm*1.05);
+ const ac_=['ear','neck','brace','bag','hacc','jacket'].filter(k=>L[k]>=0).length,accS=Math.min(10,2+ac_*1.4);
+ const used=STY.filter(k=>L[k]>=0).length+fm*.4,tp=all.reduce((a,i)=>a+i.p,0);
+ const tags=new Set();all.forEach(i=>i.t.forEach(x=>tags.add(x)));
+ const cre=Math.min(10,3+used*.33+([4,5,6,7].includes(L.hairc)?1:0)+(L.fx>=0?1:0)+(tags.size>=4?1:0)+Math.min(.8,tp/600));
+ const sc=[theme_,coord,color,mkS,accS,cre];const pre=Math.min(10,sc.reduce((a,b)=>a+b,0)/6*.85+(posed?1.5:.5));sc.push(pre);
+ const v=sc.map(x=>Math.round(x*10)/10),total=Math.round(v.reduce((a,b)=>a+b,0)/70*100);
+ let total2=total,bp=null;
+ if(BPM()){const[a1,a2,a3,a4,a5,a6,a7]=v,W=[20,15,15,10,10,15,15],b0=v.reduce((a,x,i)=>a+x/10*W[i],0);
+  const js=[(a2+a1+a7)/3,(a5+a7+a3)/3,(a6+a3+a4)/3,(a7+a6+a5)/3].map(x=>Math.round(x*10)/10);
+  total2=Math.min(100,Math.round(b0+js.reduce((a,x)=>a+Math.max(0,x-7)*.5,0)));bp={js}}
+ return{v,total:total2,bp}}
+function coinsFor(t){return t>=90?120:t>=75?75:t>=60?45:t>=40?25:10}
+/* ---------- NAV & RENDER ---------- */
+function go(n,v){cur=n;epoch++;$('#app').className=BPM()&&(n=='runway'||n=='judge')?'bp':'';m.className='';void m.offsetWidth;m.className='';R[n](v);m.style.animation='none';void m.offsetWidth;m.style.animation=''}
+const coinBar=()=>`<span class="coin">🪙 ${S.coins}</span>`;
+const back=(t)=>`<button data-a="go:${t}" aria-label="Back">←</button>`;
+const tile=(c,i,eq)=>{const it=L_[c][i],lk=!own(c,i);return `<div class="tile ${eq?'eq':''} ${lk?'lk':''}" data-a="pick:${i}" role="button"><div class="dot" style="background:${it.c}">${c=='sticker'?['★','♥','◆','☾'][i]:LAB[c][1]}</div>${it.n}<br>${lk?'🔒'+it.p:eq?'✔':''}</div>`};
+const R={
+home(){m.innerHTML=`<div class="top"><button data-a="mute">${S.mute?'🔇':'🔊'}</button>${coinBar()}</div><h1>Glam Girls: <span>Dress to Impress</span></h1><div class="pv fl">${myAv(1)}</div><div class="card" style="flex-direction:row;justify-content:center">🏆 Best score: ${S.best}</div><button class="big" data-a="go:theme">▶ PLAY</button><div class="row"><button class="v" data-a="go:chars">👭 Girls</button><button class="t" data-a="go:shop">🛍️ Shop</button></div><div class="row"><button class="g" data-a="go:wardrobe">👚 Wardrobe</button><button class="v" data-a="go:settings">⚙️ Settings</button></div>`},
+chars(){m.innerHTML=`<div class="top">${back('home')}<h2 style="flex:1">Choose Your Girl</h2>${coinBar()}</div><div class="grid">${CH.map(c=>{const u=S.chars.includes(c.id);return `<div class="card">${av(c,base(c),{},0)}<div>${c.n}<br><small style="font-weight:600">${c.d}</small></div><button class="${u?(S.sel==c.id?'x':'t'):'g'}" data-a="char:${c.id}" style="width:100%">${u?(S.sel==c.id?'Selected':'Select'):'🔒 Buy 🪙'+c.p}</button></div>`}).join('')}</div>`},
+theme(){m.innerHTML=`<div class="top">${back('home')}<h2 style="flex:1">Pick a Theme</h2></div><button class="g big" data-a="rand">🎲 Surprise Me!</button><div class="grid">${TH.map(t=>`<button data-a="th:${t.id}" style="background:${t.c};min-height:72px;box-shadow:0 4px 0 #0003;border-radius:20px">${t.e}<br>${t.n}</button>`).join('')}</div>`},
+style(){studio('style')},makeup(){studio('mk')},
+runway(){posed=false;rw={t:0,done:0};m.innerHTML=`<div class="top">${back('makeup')}<div class="ban" style="background:${theme.c}">${theme.e} ${theme.n}</div>${BPM()?'<span class="bpb">BLACKPINK MODE</span>':''}</div><div class="rw ${BPM()?'bpr':''}"><div class="cur l"></div><div class="cur r"></div><div class="spot"></div>${[[15,12],[80,20],[30,40],[70,55],[50,8],[88,45]].concat(BPM()?[[8,30],[92,15],[60,30],[40,18],[22,60],[78,62]]:[]).map((p,i)=>`<span class="spk" style="left:${p[0]}%;top:${p[1]}%;animation-delay:${i*.3}s">${BPM()&&i%2?"★":"✦"}</span>`).join('')}<div class="aud"></div><div class="stage"><div id="wk" style="height:100%">${myAv(1)}</div></div><div class="rwb" id="rwb" style="display:none"><button class="v" data-a="pose">💃 Strike a Pose</button><button class="g" data-a="present">⭐ Present Look</button></div></div>`;rw.el=$('#wk');rw.el.style.transform='translateX(-75%)';bgm()},
+judge(){res=judge();const t=res.total,best=t>S.best,first=S.day!=new Date().toDateString();let c=coinsFor(t),b1=best?20:0,b2=first?25:0;const b3=res.bp&&t>=80?10:0;res.coins=c;res.b1=b1;res.b2=b2;res.b3=b3;res.new=best;S.coins+=c+b1+b2+b3;if(best)S.best=t;if(first)S.day=new Date().toDateString();save();if(res.bp)return judgeBP(t);
+ const idx=res.v.map((x,i)=>i).sort((a,b)=>res.v[b]-res.v[a]),keys=CATN.map(x=>x[0]),hi=keys[idx[0]],hi2=keys[idx[1]],lo=keys[idx[6]];
+ const lines=[HI[hi],HI[hi2],res.v[idx[6]]<7?LO[lo]:TIER.find(x=>t>=x[0])[1]];
+ m.innerHTML=`<h2>The Judges Score Your Look</h2><div class="pv" style="flex:.7">${myAv(1)}</div><div class="jd">${JG.map((j,i)=>`<div class="card"><div class="e">${j[1]}</div>${j[0]}<small id="jb${i}" style="font-weight:600"> </small></div>`).join('')}</div><div>${CATN.map((c,i)=>`<div class="cr"><span>${c[1]}</span><i><u id="b${i}"></u></i><span id="n${i}"></span></div>`).join('')}</div><button class="big g" id="nx" style="display:none" data-a="go:reward">See Rewards 🪙</button>`;
+ CATN.forEach((c,i)=>later(700+i*650,()=>{$('#b'+i).style.width=res.v[i]*10+'%';$('#n'+i).textContent=res.v[i];sfx('judge');vib(8);if(i==2||i==4||i==6){const j=(i-2)/2;$('#jb'+j).textContent=lines[j]}}));
+ later(700+7*650+300,()=>{$('#nx').style.display='block';sfx(t>=75?'hi':'coin')})},
+reward(){const t=res.total,tot=res.coins+res.b1+res.b2+(res.b3||0);m.innerHTML=`${res.bp?'<span class="bpb" style="align-self:center">BLACKPINK MODE</span>':''}<h2>${TIER.find(x=>t>=x[0])[1]}</h2><div class="sco">${t}<small style="font-size:.3em">/100</small></div><div class="card">🪙 +${res.coins} for your score${res.b1?`<br>🏆 +${res.b1} new best score!`:''}${res.b2?`<br>🎁 +${res.b2} first look of the day`:''}${res.b3?'<br>🖤💗 BLACKPINK MODE BONUS: +10 coins!':''}<br><b>Earned ${tot} · Balance 🪙 ${S.coins}</b></div><div class="pv" style="flex:1">${myAv(1)}</div><div class="row"><button class="g" data-a="wd">👚 Save Look</button><button class="t" data-a="go:style">✨ Style Again</button></div><div class="row"><button class="v" data-a="go:theme">🎲 New Theme</button><button class="t" data-a="go:shop">🛍️ Shop</button><button data-a="go:home">🏠 Home</button></div>`;
+ if(t>=75||res.new){sfx('hi');const cs=['#ff5fa2','#8b5cf6','#14b8a6','#f5b301','#fff'];for(let i=0;i<(res.bp&&t>=90?60:26);i++){const d=document.createElement('i');d.className='cf';d.style.cssText=`left:${Math.random()*100}%;background:${cs[i%5]};animation-delay:${Math.random()*.8}s`;document.body.appendChild(d);later(3800,()=>d.remove(),1)}}else sfx('coin')},
+wardrobe(){m.innerHTML=`<div class="top">${back('home')}<h2 style="flex:1">My Wardrobe</h2></div><div class="grid">${S.wd.length?S.wd.map((w,i)=>`<div class="card sm">${av(CH.find(c=>c.id==w.c)||CH[0],w.L,w.M,1)}<small>${(TH.find(t=>t.id==w.th)||TH[0]).n}${w.sc?' · '+w.sc:''}</small><div class="row" style="width:100%"><button class="t" data-a="wear:${i}">Wear</button><button class="x" data-a="del:${i}">🗑</button></div></div>`).join(''):'<div class="card" style="grid-column:span 2">Your saved looks will appear here. Tap Save Look while styling!</div>'}</div>`},
+settings(){const sw=(a,on,t,d)=>`<div class="swr"><div><b>${t}</b>${d?`<small>${d}</small>`:''}</div><button class="sw ${on?'on':''}" data-a="${a}" aria-label="${t}"><i></i></button></div>`;
+m.innerHTML=`<div class="top">${back('home')}<h2 style="flex:1">Settings</h2></div><div class="list">${sw('mute',!S.mute,'Sound effects')}${sw('music',S.music,'Music','Original generated tunes')}${sw('vib',S.vib,'Vibration')}${sw('bp',BPM(),'BLACKPINK MODE','Turn on a fan-inspired black-and-pink judging experience with four themed judges, original fashion comments, special runway effects, and bonus rewards.')}<small class="dis">${BPM()?'ON — BLACKPINK-inspired themed judges':'OFF — Standard Glam Girls judges'}<br>Fan-inspired mode. Not affiliated with or endorsed by BLACKPINK.</small><button class="t" data-a="go:help">❓ Help &amp; instructions</button><button class="x" data-a="reset" id="rs">Reset all progress</button></div>`},
+help(){m.innerHTML=`<div class="top">${back('settings')}<h2 style="flex:1">How to Play</h2></div><div class="list"><div class="card" style="text-align:left;font-weight:600;gap:8px"><div>1. Pick your girl and a fashion theme.</div><div>2. Tap items in the Styling Studio to equip them. Items that match the theme score higher, and harmonious colors help too.</div><div>3. Add makeup, then tap Present to walk the runway.</div><div>4. Strike a pose for a presentation bonus, then meet the judges.</div><div>5. Earn coins and spend them in the Shop. Free items can score great with good coordination and creativity!</div><div>6. BLACKPINK MODE (Settings) swaps in four fan-inspired judges, special runway effects and a +10 coin bonus for scores of 80+.</div></div></div>`},
+shop(v){const T=SHT;const ti=v||0,t=T[ti];let h=`<div class="top">${back('home')}<h2 style="flex:1">Shop</h2>${coinBar()}</div><div class="sc">${T.map((x,i)=>`<button class="tab ${i==ti?'on':''}" data-a="stab:${i}">${x.n}</button>`).join('')}</div><div class="list" id="ls">`;
+ if(t.chars)h+=CH.map(c=>{const u=S.chars.includes(c.id);return `<div class="it"><div style="height:80px;width:44px">${av(c,base(c),{},0)}</div><b>${c.n}<small>Character</small></b><button class="${u?(S.sel==c.id?'x':'t'):CH.length&&S.coins>=c.p?'g':'x'}" data-a="char:${c.id}:s">${u?(S.sel==c.id?'EQUIPPED':'OWNED'):S.coins>=c.p?'BUY 🪙'+c.p:'🔒 🪙'+c.p}</button></div>`}).join('');
+ else t.c.forEach(c=>L_[c].forEach((it,i)=>{if(t.f&&!t.f(it))return;if(it.p==0&&!MKC.includes(c))return;const o=own(c,i),e=o&&gv(c)==i;h+=`<div class="it" id="r${c}${i}"><div class="dot" style="background:${it.c};width:44px;height:44px">${c=='sticker'?['★','♥','◆','☾'][i]:LAB[c][1]}</div><b>${it.n}<small>${LAB[c][0]}</small></b><button class="${e?'x':o?'t':S.coins>=it.p?'g':'x'}" data-a="buy:${c}:${i}">${e?'EQUIPPED':o?'OWNED':S.coins>=it.p?'BUY 🪙'+it.p:'🔒 🪙'+it.p}</button></div>`}));
+ m.innerHTML=h+'</div>';const sc=$('.sc');if(sc)sc.scrollLeft=window._ss||0}};
+const SL=['That look is iconic!','Main-stage energy!','Fashion goals unlocked!','You understood the theme!','The sparkle is giving!','So chic!','This look is a total slay!','Born for the spotlight!','Big fashion energy!','That styling is on fire!','The confidence is everything!','A true star moment!','This outfit is ready for the runway!','The details are absolutely gorgeous!','That look is pink-and-black perfection!'];
+const JV=[{n:'Jisoo',l:'Elegance & Charm',h:'#4a2f27',d:'#f4b8dc',a:'#c9b6ff',k:'✦',s:'#f6d2b8',L:['So elegant and beautifully styled!','This look has a lovely polished charm!','The details feel graceful and complete!','A soft, stylish moment with great confidence!'],tip:'a graceful finishing detail'},
+{n:'Jennie',l:'Luxe & Confidence',h:'#1b1b22',d:'#2a2a33',a:'#ff5fa2',k:'★',s:'#f3d3bd',u:1,L:['This look brings serious fashion energy!','The styling is bold, confident, and memorable!','Your outfit has a strong statement moment!','This is polished, modern, and full of attitude!'],tip:'a bold statement accessory'},
+{n:'Rosé',l:'Creative & Romantic',h:'#c9a074',d:'#ffc2d4',a:'#8ec5ff',k:'✿',s:'#f8dcc6',L:['The colors blend together beautifully!','This look feels creative and expressive!','The styling has a lovely dreamy quality!','Every detail adds personality to the outfit!'],tip:'one more artistic detail'},
+{n:'Lisa',l:'Stage Presence',h:'#2b2024',d:'#7c3aed',a:'#ffd75e',k:'★',s:'#f0cdb0',u:1,L:['This look is full of stage-ready energy!','You made a powerful fashion entrance!','The styling is playful, bold, and exciting!','That pose gives the outfit an unforgettable finish!'],tip:'an energetic finishing touch'}];
+const jav=j=>`<svg viewBox="0 0 80 100"><path d="M14 52Q10 8 40 8Q70 8 66 52L70 84H10Z" fill="${j.h}"/>${j.u?`<circle cx="40" cy="6" r="8" fill="${j.h}"/>`:''}<path d="M18 100L24 64H56L62 100Z" fill="${j.d}"/><path d="M24 72H56" stroke="${j.a}" stroke-width="3"/><circle cx="40" cy="40" r="20" fill="${j.s}"/><path d="M21 38Q40 12 59 38Q40 26 21 38Z" fill="${j.h}"/><circle cx="33" cy="42" r="2.4" fill="#222"/><circle cx="47" cy="42" r="2.4" fill="#222"/><path d="M34 51Q40 56 46 51" stroke="#d6336c" fill="none" stroke-width="2"/><text x="50" y="22" font-size="15" fill="${j.a}">${j.k}</text></svg>`;
+function cnt(el,to,d,dec){const t0=performance.now();(function f(n){const k=Math.min(1,(n-t0)/d);el.textContent=(to*k).toFixed(dec);if(k<1)requestAnimationFrame(f);else el.textContent=to.toFixed(dec)})(t0)}
+function bgm(){if(!S.music)return;(BPM()?[330,392,494,659,494,392]:[262,330,392,523,392,330]).forEach((f,i)=>later(i*260,()=>tone(f,.18,0)));later(1700,bgm)}
+function judgeBP(t){const js=res.bp.js,tot=res.coins+res.b1+res.b2+res.b3;
+ m.innerHTML=`<div class="top"><span class="bpb">BLACKPINK MODE</span></div><h2>Fashion Judges</h2><div class="grid jg">${JV.map((j,i)=>`<div class="card jc">${jav(j)}<b>${j.n}</b><small>${j.l}</small><div class="js"><span id="js${i}">0.0</span>/10</div><small id="jt${i}" class="jq"> </small></div>`).join('')}</div><div class="card" id="fin" style="visibility:hidden"><div class="sco" style="font-size:clamp(44px,14vw,70px)"><span id="ft">0</span><small style="font-size:.35em">/100</small></div>🪙 +${tot} coins${res.b3?'<br>BLACKPINK MODE BONUS: +10 coins!':''}</div><small class="dis">Fan-inspired mode. Not affiliated with or endorsed by BLACKPINK.</small><button class="big g" id="nx" style="display:none" data-a="go:reward">See Rewards 🪙</button>`;bgm();
+ js.forEach((s,i)=>later(600+i*1100,()=>{cnt($('#js'+i),s,800,1);sfx('judge');vib(8);const j=JV[i],sl=' '+SL[Math.random()*15|0];$('#jt'+i).textContent=s>=7?j.L[Math.random()*4|0]+sl:'Lovely start—try adding '+j.tip+'!'+(s>=6?sl:'')}));
+ later(600+4*1100,()=>{$('#fin').style.visibility='visible';cnt($('#ft'),t,900,0);sfx(t>=75?'hi':'bp');$('#nx').style.display='block'})}
+const SHT=[{n:'Girls',chars:1},{n:'Dresses',c:['dress'],f:i=>i.s!='t'},{n:'Tops',c:['dress'],f:i=>i.s=='t'},{n:'Bottoms',c:['bottom']},{n:'Shoes',c:['shoes']},{n:'Hair',c:['hair']},{n:'Hair Acc.',c:['hacc']},{n:'Jewelry',c:['ear','neck','brace']},{n:'Bags & Coats',c:['bag','jacket']},{n:'Makeup',c:MKC},{n:'Effects',c:['fx']}];
+/* ---------- STUDIO ---------- */
+let curTab=0;const tabsOf=()=>mode=='style'?STY:MKC.concat(['look']);
+function studio(md){mode=md;tab=tabsOf()[0];
+ m.innerHTML=`<div class="top">${back(md=='style'?'theme':'style')}<div class="ban" style="background:${theme.c}">${theme.e} ${theme.n}</div><button class="v" data-a="rst" aria-label="Reset">↺</button></div><div class="pv" id="pv"></div><div class="sc" id="tabs"></div><div class="sc" id="tray"></div><div class="bar"><button class="v" data-a="nav:-1">◀</button><button class="x" data-a="none">✖</button><button class="v" data-a="nav:1">▶</button><button class="g" data-a="wd">💾</button><button class="w" data-a="${md=='style'?'go:makeup':'go:runway'}">${md=='style'?'Makeup ▶':'Present ▶'}</button></div>`;upT();upTray();upPv()}
+const upPv=()=>{$('#pv').innerHTML=myAv(1)};
+function upT(){$('#tabs').innerHTML=tabsOf().map(t=>`<button class="tab ${t==tab?'on':''}" data-a="tab:${t}">${t=='look'?'💄<br>Looks':LAB[t][1]+'<br>'+LAB[t][0]}</button>`).join('')}
+function upTray(){const tr=$('#tray'),sl=tr.scrollLeft;tr.innerHTML=tab=='look'?PRE.map((p,i)=>`<div class="tile" data-a="pre:${i}"><div class="dot" style="background:#f9a8d4">💄</div>${p[0]}</div>`).join(''):L_[tab].map((x,i)=>tile(tab,i,gv(tab)==i)).join('');tr.scrollLeft=sl}
+function setItem(c,i){if(!own(c,i)){sfx('err');toast('Locked! Buy it in the Shop for 🪙'+L_[c][i].p);return}slot(c)[c]=i;save();sfx(MKC.includes(c)?'mk':'equip');vib();upPv();upTray()}
+/* ---------- ACTIONS ---------- */
+const A={
+go(v){sfx('tap');go(v)},
+mute(){S.mute=S.mute?0:1;save();sfx('tap');go(cur)},vib(){S.vib=S.vib?0:1;save();vib(30);go(cur)},
+char(id,s){const c=CH.find(x=>x.id==id);if(!S.chars.includes(id)){if(S.coins<c.p){sfx('err');toast('Not enough coins — you need 🪙'+(c.p-S.coins)+' more!');return}S.coins-=c.p;S.chars.push(id);sfx('unlock');toast(c.n+' joined your team! 🎉')}else sfx('pick');
+ S.sel=id;const L=S.look;L.skin=c.skin;L.eyes=c.eyes;L.hair=c.hair;L.hairc=c.hc;S.own['hair:'+c.hair]=1;save();vib();go(cur,s?window._st:undefined)},
+th(id){theme=TH.find(t=>t.id==id);sfx('pick');go('style')},rand(){theme=TH[Math.random()*12|0];sfx('pick');toast('Theme: '+theme.n+' '+theme.e);go('style')},
+tab(t){tab=t;sfx('tap');upT();upTray()},
+pick(i){setItem(tab,+i)},
+pre(i){const p=PRE[i][1];let sk=0;MKC.forEach(k=>{if(k in p){if(own(k,p[k]))S.mk[k]=p[k];else sk++}else S.mk[k]=-1});save();sfx('mk');upPv();if(sk)toast('Some items are locked — find them in the Shop!')},
+nav(d){if(tab=='look')return;const n=L_[tab].length;let i=gv(tab);for(let k=0;k<n;k++){i=((i+d)%n+n)%n;if(own(tab,i))return setItem(tab,i)}},
+none(){if(tab=='look'||['skin','eyes','hair','hairc'].includes(tab)){sfx('err');toast('This one can’t be removed');return}slot(tab)[tab]=-1;save();sfx('tap');upPv();upTray()},
+rst(){if(mode=='style')S.look=base(ch());else S.mk={};save();sfx('tap');toast('Look reset');upPv();upTray()},
+wd(){S.wd.unshift({c:S.sel,L:Object.assign({},S.look),M:Object.assign({},S.mk),th:theme.id,sc:res&&cur=='reward'?res.total:0});S.wd=S.wd.slice(0,12);save();sfx('equip');toast('Saved to your wardrobe! 👚')},
+wear(i){const w=S.wd[i];S.sel=w.c;S.look=Object.assign({},w.L);S.mk=Object.assign({},w.M);save();sfx('equip');toast('Look equipped!');go('style')},
+del(i){S.wd.splice(i,1);save();sfx('tap');go('wardrobe')},
+pose(){posed=true;if(BPM()){[0,1,2].forEach(i=>later(i*550,()=>{rw.ps=i;sfx('pick');vib(10)}))}else{sfx('pick');vib()}},present(){sfx('run');go('judge')},
+stab(i){window._ss=$('.sc').scrollLeft;sfx('tap');go('shop',+i)},
+buy(c,i){i=+i;const it=L_[c][i];window._ss=$('.sc').scrollLeft;const ti=SHT.findIndex(t=>t.c&&t.c.includes(c)&&(!t.f||t.f(it)));
+ if(own(c,i)){slot(c)[c]=i;save();sfx('equip');vib();return go('shop',ti)}
+ if(S.coins<it.p){sfx('err');toast('Not enough coins — you need 🪙'+(it.p-S.coins)+' more!');vib([30,40,30]);return}
+ S.coins-=it.p;S.own[c+':'+i]=1;slot(c)[c]=i;save();sfx('buy');vib(25);go('shop',ti);const r=$('#r'+c+i);if(r)r.classList.add('pop');toast('Bought '+it.n+'! 🎀 Equipped.')},
+music(){S.music=S.music?0:1;save();sfx('tap');go(cur)},bp(){S.blackpinkModeEnabled=!S.blackpinkModeEnabled;save();sfx(BPM()?'bp':'tap');vib();go(cur)},
+reset(){const b=$('#rs');if(b.dataset.c){localStorage.removeItem(K);S=Object.assign({},S0,{own:{},mk:{},wd:[],chars:['ava']});S.look=base(CH[0]);save();sfx('tap');go('home')}else{b.dataset.c=1;b.textContent='Tap again to erase everything'}}};
+let lastT=0;
+function onTap(e){const t=e.target.closest('[data-a]');if(!t||paused)return;const n=performance.now();if(n-lastT<120)return;lastT=n;const p=t.dataset.a.split(':');const f=A[p[0]];if(f)f.apply(null,p.slice(1))}
+$('#app').addEventListener('pointerup',onTap);
+window.addEventListener('pagehide',save);
+go('home');
+</script></body></html>
